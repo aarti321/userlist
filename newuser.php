@@ -34,55 +34,68 @@ function add_new_funct(){
     include_once PLUGIN_DIR_PATH."/includes/setting.php";
 }
 
+add_shortcode('notlist','frontend');
+function frontend(){
+    echo "no users here";
+}
+
 add_shortcode('list','frontendlist');
 
 function frontendlist(){
     
    
-    $args1 = array(
-     'role' => 'subscriber',
-     'orderby' => 'user_nicename',
-     'order' => 'ASC'
-    );
-     $subscribers = get_users($args1);
-    echo '<ul>';
-     foreach ($subscribers as $user) {
-     echo '<li>' . $user->display_name.'['.$user->user_email . ']</li>';
-     }
-    echo '</ul>';
-
+    
+   
     $args1 = array(
         'role' => 'subscriber',
         'orderby' => 'user_nicename',
         'order' => 'ASC'
        );
         $subscribers = get_users($args1);
-       echo '<ul>';
+       echo ' <table class="table">';
+           echo '<thead>';
+            echo '<tr>';
+            echo '<th scope="col">Username</th>';
+           echo ' <th scope="col">User Email</th>';
+           echo ' </tr>';
+           echo ' </thead>';
         foreach ($subscribers as $user) {
-        echo '<li>' . $user->display_name.'['.$user->user_email . ']</li>';
+        
+            echo '<tbody>';
+            echo '<tr>';
+            echo '<td>'.$user->display_name.'</td>';
+            echo '<td>'.$user->user_email.'</td>';
+            echo '</tr>';
+            echo '</tbody>';
+        //echo '<li>' . $user->display_name.'['.$user->user_email . ']</li>';
         }
-       echo '</ul>';
-       ?>
-   
+       echo ' </table>';
        
-       <?php
-       
-       $args2 = array(
-        'role' => 'admin',
+    $args2 = array(
+        'role' => 'Administrator',
         'orderby' => 'user_nicename',
         'order' => 'ASC'
        );
         $authors = get_users($args2);
-       echo '<ul>';
-        foreach ($authors as $user) {
-        echo '<li>' . $user->display_name.'['.$user->user_email . ']</li>';
+       echo '<table class ="table">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th scope ="col">Username</th>';
+            echo '<th scope ="col">User Email</th>';
+            echo '</tr>';
+            echo '</thead>';
+
+            foreach ($authors as $user) {
+        
+
+            echo '<tbody>';
+            echo '<tr>';
+            echo '<td>'.$user->display_name.'</td>';
+            echo '<td>'.$user->user_email.'</td>';
+            echo '</tr>';
+            echo '</tbody>';
+       
         }
-       echo '</ul>';
+       echo '</table>';
     
 }
-
-///changes here
-
-
-   
-
